@@ -1,0 +1,39 @@
+2024-09-12T22:39:54.855Z [error]: Invalid token input
+2024-09-12T22:40:15.672Z [error]: Invalid token input
+2024-09-12T23:03:38.185Z [info]: Invalid credential [object Object]
+2024-09-12T23:03:38.190Z [error]: secretOrPrivateKey must have a value
+2024-09-12T23:04:18.075Z [info]: Invalid credential [object Object]
+2024-09-12T23:04:18.076Z [error]: secretOrPrivateKey must have a value
+2024-09-12T23:06:27.565Z [info]: Invalid credential [object Object]
+2024-09-12T23:06:27.576Z [error]: secretOrPrivateKey must have a value
+2024-09-12T23:06:31.335Z [info]: Invalid credential [object Object]
+2024-09-12T23:06:31.337Z [error]: secretOrPrivateKey must have a value
+2024-09-12T23:07:44.554Z [info]: Invalid credential [object Object]
+2024-09-12T23:07:44.573Z [error]: secretOrPrivateKey must have a value
+2024-09-12T23:07:46.691Z [info]: Invalid credential [object Object]
+2024-09-12T23:07:46.694Z [error]: secretOrPrivateKey must have a value
+2024-09-12T23:09:38.556Z [info]: Invalid credential [object Object]
+2024-09-12T23:09:38.573Z [error]: secretOrPrivateKey must have a value
+2024-09-12T23:11:05.707Z [error]: Invalid token input
+2024-09-12T23:11:29.148Z [info]: Invalid credential [object Object]
+2024-09-12T23:11:29.159Z [error]: secretOrPrivateKey must have a value
+2024-09-12T23:14:00.426Z [info]: Invalid credential [object Object]
+2024-09-12T23:14:33.816Z [error]: Invalid token input
+2024-09-12T23:14:39.695Z [info]: Invalid credential [object Object]
+2024-09-12T23:15:06.579Z [error]: Invalid token input
+2024-09-12T23:15:12.627Z [info]: Invalid credential [object Object]
+2024-09-12T23:15:44.860Z [info]: Invalid credential [object Object]
+2024-09-12T23:16:30.308Z [error]: Invalid token input
+2024-09-12T23:16:42.628Z [info]: Invalid credential [object Object]
+2024-09-12T23:17:55.909Z [info]: Invalid credential [object Object]
+2024-09-12T23:18:54.232Z [info]: Invalid credential [object Object]
+2024-09-12T23:19:51.919Z [info]: Invalid credential [object Object]
+2024-09-12T23:19:52.105Z [error]: Invalid authentication
+2024-09-12T23:19:56.106Z [info]: Invalid credential [object Object]
+2024-09-12T23:19:56.308Z [error]: Invalid authentication
+2024-09-12T23:19:58.870Z [info]: Invalid credential [object Object]
+2024-09-12T23:19:59.109Z [error]: Invalid authentication
+2024-09-12T23:20:02.557Z [info]: Invalid credential [object Object]
+2024-12-07T16:16:29.645Z [error]: Invalid token input
+2024-12-07T16:16:42.226Z [error]: Invalid credential
+2024-12-07T16:17:24.456Z [info]: Invalid credential [object Object]
