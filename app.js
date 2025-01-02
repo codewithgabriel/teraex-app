@@ -46,7 +46,7 @@ async function main() {
     await connect(process.env.MONGODB_URL);
     console.log('Database Connected')
   }catch(err) { 
-    console.log(err)
+    console.error(err)
   }
 
 }
@@ -57,13 +57,13 @@ import usersRouter from './routes/v1/users.js';
 import signupRouter from './routes/v1/signup.js';
 
 //use app routers with api routes
-app.get("*", (req, res) => {
-  res.sendFile(join(__dirname, "dist", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(join(__dirname, "dist", "index.html"));
+// });
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/v1/users', usersRouter);
 app.post('/v1/signup' , signupRouter);
 app.post('/v1/signin' , signinRouter)
 

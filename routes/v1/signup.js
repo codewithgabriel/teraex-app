@@ -1,7 +1,9 @@
 import { Router } from "express";
-var router = Router();
-import Users from "../../models/users.js";
+let router = Router();
 import { createBtcWallet } from "./btc/create_btc_wallet.js";
+import { signUserAuthToken } from "../../utils/utlities.js";
+
+// import utils
 import {
   isText,
   isPassword,
@@ -9,31 +11,72 @@ import {
   getMaxServerTimeout,
   hashPassword,
 } from "../../utils/utlities.js";
+//import all models
+import Users from "../../models/users.js";
 import BtcWallets from "../../models/btc_wallets.js";
-import pgk from "jsonwebtoken";
+import NGNWallet from "../../models/ngn_wallets.js";
+import TeraWallets from "../../models/tera_wallets.js";
 
-const { sign } = pgk;
+import {
+  INPUT_VALID_ERR,
+  USER_ACCT_ALREADY_EXISTS,
+  USER_ACCT_CREATE_ERR,
+  USER_ACCT_CREATE_SUCCESS,
+  WALLETS_GENERATE_ERROR,
+} from "../../utils/states.js";
 
 /* create new user account. */
 const signupRouter = router.use("/", async function (req, res, next) {
   req.setTimeout(getMaxServerTimeout());
   try {
     const { fullname, password, email } = req.body;
-    //step 1. validate user infos for correct format
+    // validate user info for correct format
     if (!(isText(fullname) && isPassword(password) && isEmail(email)))
-      throw { reason: "Invalid Token input" };
-
-    //step 2. generate btc wallet
-    const { privateKey, publicKey, address, wif, mnemonic } = createBtcWallet();
-
+      throw { status: INPUT_VALID_ERR };
     const _hashedPassword = await hashPassword(password);
-
-    //step 3. save user
+    // save user
     let user = new Users({ fullname, password: _hashedPassword, email });
     let savedUser = await user.save();
-    // console.log(savedUser)
 
-    //step 4. save user btc wallet
+    /* generate defaults  wallets  (BTC, ETH, SOL , NGN (virtual wallet))*/
+    // generate btc wallet
+    await generateDefaultWallets(savedUser);
+    const { _id } = user;
+
+    const payload = {
+      id: _id,
+    };
+    // sign user's payload
+    let signedPayload = await signUserAuthToken(payload);
+
+    res.send({
+      error: false,
+      status: USER_ACCT_CREATE_SUCCESS,
+      authToken: signedPayload,
+    });
+    res.end();
+  } catch (err) {
+    if (err.code == 11000) {
+      res.send({
+        error: true,
+        status: USER_ACCT_ALREADY_EXISTS,
+      });
+    } else {
+      res.send({
+        error: true,
+        status: USER_ACCT_CREATE_ERR,
+      });
+    }
+    console.log(err.message || err.status);
+    res.end();
+  }
+});
+
+// generate all default wallets
+async function generateDefaultWallets(savedUser) {
+  try {
+    const { privateKey, publicKey, address, wif, mnemonic } = createBtcWallet();
+    // generate and save btc wallet
     const btcWallet = new BtcWallets({
       privateKey,
       publicKey,
@@ -42,33 +85,26 @@ const signupRouter = router.use("/", async function (req, res, next) {
       mnemonic,
       owner: savedUser._id,
     });
-    const savedbtcWallet = await btcWallet.save();
-    // console.log(savedbtcWallet);
+    await btcWallet.save();
 
-    res.send({
-      error: false,
-      reason: "User account created",
-      type: "USER_ACCT_CREATE",
+    //generate and save virtual ngn wallet
+    const ngnWallet = new NGNWallet({
+      balance: 0,
+      address: `ngn_${savedUser._id}`,
+      owner: savedUser._id,
     });
-    res.end();
+    await ngnWallet.save();
+
+    // generate and save virtual ngn wallet
+    const teraWallet = new TeraWallets({
+      balance: 0,
+      address: `tera_${savedUser._id}`,
+      owner: savedUser._id,
+    });
+    await teraWallet.save();
   } catch (err) {
-    if (err.code == 11000) {
-      res.send({
-        error: true,
-        reason: "User already exist",
-        type: "USER_ACCT_CREATE_ERR",
-      });
-    } else {
-      res.send({
-        error: true,
-        reason: err.reason,
-        type: "USER_ACCT_CREATE_ERR",
-      });
-    }
-    res.end();
-    // log error
-    console.log(err);
+    throw { status: WALLETS_GENERATE_ERROR };
   }
-});
+}
 
 export default signupRouter;

@@ -11,7 +11,7 @@ const route = express.Router();
 route.use(jwtValidator);
 export default route.post("/", function (req, res, next) {
   try {
-    // step 1. generate btc wallet
+    // generate btc wallet
     const { 
      privateKey,
      publicKey,
@@ -19,7 +19,7 @@ export default route.post("/", function (req, res, next) {
      address,
      mnemonic } = createBtcWallet();
 
-    //step 2. save walleted
+    //save walleted
     let wallet = new BtcWallets({
       privateKey,
       publicKey,
@@ -67,7 +67,7 @@ export function createBtcWallet() {
   // Step 5: Get the private key, public key, WIF, and address
   const privateKey = account.privateKey.toString("hex");
   const publicKey = account.publicKey.toString("hex");
-  const wif = account.toWIF(); // Wallet Import Format of the private key
+  const wif = account.toBase58(); // Wallet Import Format of the private key
 
   const { address } = bitcoin.payments.p2pkh({
     pubkey: account.publicKey,

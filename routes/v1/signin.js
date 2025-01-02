@@ -1,33 +1,35 @@
 import { Router } from "express";
 var router = Router();
 import Users from "../../models/users.js";
+
+// import utility functions
 import {
   isPassword,
   isEmail,
   signUserAuthToken,
   verifyPassword,
 } from "../../utils/utlities.js";
+
 import logger from "../../utils/logger.js";
-
+import { INPUT_VALID_ERR, USER_ACCT_AUTH_ERR, USER_ACCT_AUTH_SUCCESS } from "../../utils/states.js";
 /* create new user account. */
-
 const signinRouter = router.use("/", async function (req, res, next) {
   try {
     const { email, password } = req.body;
     //step 1. validate user infos for correct format
     if (!(isPassword(password) && isEmail(email)))
-      throw { message: "Invalid token input" };
+      throw { message: INPUT_VALID_ERR };
 
     //step 2. find the user with the credential
 
     let user = await Users.findOne({ email });
 
     //throw error if the user is not authenticated
-    if (!user) throw { message: "Invalid credential" };
-    logger.info(`Invalid credential ${req.headers}`);
+    if (!user) throw { message: USER_ACCT_AUTH_ERR  };
+    // logger.info(`Invalid credential ${req.headers}`);
 
     if (!(await verifyPassword(password, user.password)))
-      throw { message: "Invalid authentication" };
+      throw { message: USER_ACCT_AUTH_ERR  };
     const { _id } = user;
 
     const payload = {
@@ -40,20 +42,21 @@ const signinRouter = router.use("/", async function (req, res, next) {
     res.send({
       error: false,
       reason: "Authentication success",
-      type: "USER_AUTH_SUCCESS",
+      status: USER_ACCT_AUTH_SUCCESS,
       authToken: signedPayload,
     });
     res.end();
+
+
   } catch (err) {
     res.send({ 
       error: true, 
-      reason: err.message, 
-      type: "USER_AUTH_ERR"
+      status: err.message, 
      });
     res.end();
     // log error
     console.log(err);
-    logger.error(err.message);
+    // logger.error(err.message);
   }
 });
 
