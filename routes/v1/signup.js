@@ -1,6 +1,6 @@
 import { Router } from "express";
 let router = Router();
-import { createBtcWallet } from "./btc/create_btc_wallet.js";
+import { createBitcoinWallet } from "../../tokens/bitcoin.js";
 import { signUserAuthToken } from "../../utils/utlities.js";
 
 // import utils
@@ -75,7 +75,7 @@ const signupRouter = router.use("/", async function (req, res, next) {
 // generate all default wallets
 async function generateDefaultWallets(savedUser) {
   try {
-    const { privateKey, publicKey, address, wif, mnemonic } = createBtcWallet();
+    const { privateKey, publicKey, address, wif, mnemonic } = createBitcoinWallet();
     // generate and save btc wallet
     const btcWallet = new BtcWallets({
       privateKey,

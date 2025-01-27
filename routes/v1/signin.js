@@ -10,7 +10,7 @@ import {
   verifyPassword,
 } from "../../utils/utlities.js";
 
-import logger from "../../utils/logger.js";
+
 import { INPUT_VALID_ERR, USER_ACCT_AUTH_ERR, USER_ACCT_AUTH_SUCCESS } from "../../utils/states.js";
 /* create new user account. */
 const signinRouter = router.use("/", async function (req, res, next) {
@@ -19,11 +19,9 @@ const signinRouter = router.use("/", async function (req, res, next) {
     //step 1. validate user infos for correct format
     if (!(isPassword(password) && isEmail(email)))
       throw { message: INPUT_VALID_ERR };
-
     //step 2. find the user with the credential
 
     let user = await Users.findOne({ email });
-
     //throw error if the user is not authenticated
     if (!user) throw { message: USER_ACCT_AUTH_ERR  };
     // logger.info(`Invalid credential ${req.headers}`);

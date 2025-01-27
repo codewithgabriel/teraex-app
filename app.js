@@ -37,7 +37,12 @@ app.use(express.static(path.join(__dirname, 'dist')))
 
 // init database connection
 import { connect } from 'mongoose';
+
+// all app routers
 import signinRouter from './routes/v1/signin.js';
+import indexRouter from './routes/v1/index.js';
+import usersRouter from './routes/v1/get_users.js';
+import signupRouter from './routes/v1/signup.js';
 
 main().catch(err => console.log(err));
 
@@ -51,10 +56,6 @@ async function main() {
 
 }
 
-// all app routers
-import indexRouter from './routes/v1/index.js';
-import usersRouter from './routes/v1/users.js';
-import signupRouter from './routes/v1/signup.js';
 
 //use app routers with api routes
 // app.get("*", (req, res) => {
