@@ -51,7 +51,6 @@ const signinRouter = router.use("/", async function (req, res, next) {
       error: true, 
       status: err.message, 
      });
-    res.end();
     // log error
     console.log(err);
     // logger.error(err.message);

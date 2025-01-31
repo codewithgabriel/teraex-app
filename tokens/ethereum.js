@@ -24,7 +24,7 @@ export async function sendEth(privateKey, toAddress, amount) {
 }
 
 // Function to get Ethereum balance
-export async function getBalance(address) {
+export async function getEthereumBalance(address) {
     const provider = ethers.getDefaultProvider('mainnet'); // You can change to 'ropsten', 'rinkeby', etc.
     const balance = await provider.getBalance(address);
     return ethers.utils.formatEther(balance);

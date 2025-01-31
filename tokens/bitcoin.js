@@ -6,7 +6,7 @@ import axios from "axios";
 
 let network = bitcoin.networks.testnet;
 const { BLOCKSTREAM_TESTNET }  = process.env;
-
+import BitcoinWallets from "../models/btc_wallets.js";
 
 
 // a function to create bitcoin wallet
@@ -25,7 +25,6 @@ export function createBitcoinWallet() {
 
   // Step 4: Derive a child key (e.g., first account, first address)
   const account = root.derivePath("m/44'/1'/0'/0/0"); // BIP44 standard path
-
 
   // Step 5: Get the private key, public key, WIF, and address
   const privateKey = Array.from( account.privateKey).map((byte) => byte.toString(16)).join(""); // Convert to hex
@@ -118,9 +117,31 @@ export async function getBitcoinBalance(address){
     const url = `${BLOCKSTREAM_TESTNET}/api/address/${address}`;
     const response = await axios.get(url);
     const balance = response.data.chain_stats.funded_txo_sum - response.data.chain_stats.spent_txo_sum;
-    return balance;
+    return({
+      error: false ,
+      balance
+    });
   } catch (error) {
-    console.error("Error fetching balance:", error);
+    return({
+      error: true,
+      balance: null,
+      message: error.message
+    })
+    
   }
 }
 
+
+export async function getBitcoinWalletInfo(user) {
+  try {
+  const { address } = await BitcoinWallets.findOne({ owner: user.id });
+  const { balance  , error , message } = await getBitcoinBalance(address);
+  if (error ) throw({error , message})
+  return {
+    balance,
+    address,
+  };
+  }catch(err){ 
+      throw (err)
+  }
+}
