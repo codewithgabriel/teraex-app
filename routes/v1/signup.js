@@ -13,7 +13,7 @@ import {
 } from "../../utils/utlities.js";
 //import all models
 import Users from "../../models/users.js";
-import BtcWallets from "../../models/btc_wallets.js";
+import BtcWallets from "../../models/bitcoin_wallets.js";
 import NGNWallet from "../../models/ngn_wallets.js";
 import TeraWallets from "../../models/tera_wallets.js";
 
@@ -39,7 +39,6 @@ const signupRouter = router.use("/", async function (req, res, next) {
     let savedUser = await user.save();
 
     /* generate defaults  wallets  (BTC, ETH, SOL , NGN (virtual wallet))*/
-    // generate btc wallet
     await generateDefaultWallets(savedUser);
     const { _id } = user;
 

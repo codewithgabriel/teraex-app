@@ -6,7 +6,7 @@ import axios from "axios";
 
 let network = bitcoin.networks.testnet;
 const { BLOCKSTREAM_TESTNET }  = process.env;
-import BitcoinWallets from "../models/btc_wallets.js";
+import BitcoinWallets from "../models/bitcoin_wallets.js";
 
 
 // a function to create bitcoin wallet
@@ -59,8 +59,8 @@ async function getUTXOs(address) {
 
 // a function for sending bitcoin 
 
-export async function sendBitcoin(toAddress, amountSatoshis) {
-  const utxos = await getUTXOs(address); // UTXOs from the previous step
+export async function sendBitcoin(fromAddress , toAddress, amountSatoshis) {
+  const utxos = await getUTXOs(fromAddress); // UTXOs from the previous step
 
   if (utxos.length === 0) {
     console.log("No UTXOs available to spend.");
@@ -86,7 +86,7 @@ export async function sendBitcoin(toAddress, amountSatoshis) {
   }
 
   txb.addOutput(toAddress, amountSatoshis); // Recipient address
-  txb.addOutput(address, change); // Change back to the sender
+  txb.addOutput(fromAddress, change); // Change back to the sender
 
   // 3. Sign the inputs
   utxos.forEach((_, index) => {
