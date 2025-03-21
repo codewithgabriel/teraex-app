@@ -12,11 +12,19 @@ export const USER_ACCT_AUTH_SUCCESS = "User Authentication Success"
 export const TX_PROCESSING  = "Transaction Processing";
 export const TX_RECEIVED = "Transaction Received"
 export const TX_SEND_SUCCESS = "Transaction Send Sucess"
-export const TX_FAILED = "Transaction Failed"
+export const TX_FAILEDD = "Transaction Failed"
 export const TX_CREDITED = "Transaction Credited"
-export const TX_DEBITEDD = "Trasaction Debited"
+export const TX_DEBITEDD = "Transaction Debited"
 export const TX_CONFIRMED = "Transaction Confirmed"
 export const TX_NOT_CONFIRMED = "Transaction Not Confirmed"
+
+//transaction types 
+export const TX_TYPE_BUY = "BUY"
+export const TX_TYPE_SEND = "SEND"
+export const TX_TYPE_SWAP = "SWAP"
+export const TX_TYPE_FUND_WALLET = "FUND WALLET"
+export const TX_TYPE_WITHDRAW = "WITHDRAW"
+export const TX_TYPE_RECEIVE = "RECEIVE"
 
 
 // Input Validation status 

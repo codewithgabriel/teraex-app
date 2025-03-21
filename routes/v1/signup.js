@@ -87,7 +87,7 @@ async function generateDefaultWallets(savedUser) {
     await btcWallet.save();
 
     //generate and save virtual ngn wallet
-    const ngnWallet = new NGNWallet({
+    const ngnWallet =  NGNWallet({
       balance: 0,
       address: `ngn_${savedUser._id}`,
       owner: savedUser._id,
