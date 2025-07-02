@@ -63,9 +63,9 @@ async function main() {
 
 
 //use app routers with api routes
-// app.get("*", (req, res) => {
-//   res.sendFile(join(__dirname, "dist", "index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(join(__dirname, "dist", "index.html"));
+});
 
 app.use('/', indexRouter);
 app.use('/v1/users', usersRouter);
