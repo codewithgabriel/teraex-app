@@ -58,7 +58,6 @@ async function getUTXOs(address) {
 }
 
 // a function for sending bitcoin 
-
 export async function sendBitcoin(fromAddress , toAddress, amountSatoshis) {
   const utxos = await getUTXOs(fromAddress); // UTXOs from the previous step
 
@@ -66,7 +65,6 @@ export async function sendBitcoin(fromAddress , toAddress, amountSatoshis) {
     console.log("No UTXOs available to spend.");
     return;
   }
-
   const txb = new bitcoin.TransactionBuilder(network);
 
   // 1. Add inputs (UTXOs)

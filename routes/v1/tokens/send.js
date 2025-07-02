@@ -13,13 +13,13 @@ router.use(jwtValidator);
 router.post("/",  async function (req, res, next) {
   try {
     const { txPayload } = req.body;
-    if (!txPayload) throw({status: TX_FAILED})
-
-    const { toAddress , fromAddress , amount ,  gasFee } = txPayload;
+    if (!txPayload) throw({status: TX_FAILED , error: true})
+    
+    const { toAddress , fromAddress , amount ,  gasFee , tokenSymbol } = txPayload;
     let tx;
 
 
-    switch(txPayload.tokenSymbol){ 
+    switch(tokenSymbol){ 
         case "BTC": 
             tx =  await sendBitcoin( fromAddress, toAddress , amount)
             break; 
@@ -37,7 +37,9 @@ router.post("/",  async function (req, res, next) {
             
 
     }
-    if (!tx) throw({status: TX_FAILED})
+    console.log(tx)
+    if (!tx) throw({status: TX_FAILED  , error: true})
+    
     res.status(200).send({error: false,  payload: tx , message: TX_SEND_SUCCESS});
 
 

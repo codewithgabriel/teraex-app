@@ -44,7 +44,10 @@ import indexRouter from './routes/v1/index.js';
 import usersRouter from './routes/v1/get_users.js';
 import signupRouter from './routes/v1/signup.js';
 
+
 import getWalletInfoRouter from './routes/v1/get_wallet_info.js'
+
+import sendTokenRoute from './routes/v1/tokens/send.js'
 
 main().catch(err => console.log(err));
 
@@ -64,7 +67,6 @@ async function main() {
 //   res.sendFile(join(__dirname, "dist", "index.html"));
 // });
 
-
 app.use('/', indexRouter);
 app.use('/v1/users', usersRouter);
 app.post('/v1/signup' , signupRouter);
@@ -72,6 +74,7 @@ app.post('/v1/signin' , signinRouter)
 
 
 app.use('/v1/getWalletInfo' , getWalletInfoRouter)
+app.use('/v1/tokens/send' , sendTokenRoute)
 
 
 // catch 404 and forward to error handler

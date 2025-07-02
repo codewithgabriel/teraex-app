@@ -1,4 +1,4 @@
-import ethers from 'ethers'
+import { ethers } from 'ethers'
 
 // Function to create an Ethereum wallet address
 export function createEthereumWallet() {
