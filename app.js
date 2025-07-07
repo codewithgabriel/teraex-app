@@ -8,7 +8,7 @@ import logger from 'morgan';
 
 
 import { fileURLToPath } from 'url';
- import { dirname } from 'path';
+import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -47,7 +47,7 @@ import signupRouter from './routes/v1/signup.js';
 
 import getWalletInfoRouter from './routes/v1/get_wallet_info.js'
 
-import sendTokenRoute from './routes/v1/tokens/send.js'
+import sendTokenRoute from './routes/v1/token_actions/send.js'
 
 main().catch(err => console.log(err));
 

@@ -3,6 +3,7 @@ var router = Router();
 
 import jwtValidator from "../../utils/jwt_validator.js";
 import { getBitcoinWalletInfo } from "../../tokens/bitcoin.js";
+import { getEthereumWalletInfo } from "../../tokens/ethereum.js";
 import { WALLET_INFO_ERROR , WALLET_INFO_SUCCESS } from "../../utils/states.js";
 
 
@@ -16,6 +17,9 @@ router.use("/", async (req, res) => {
     switch (token.symbol) {
       case "BTC":
         walletInfo = await getBitcoinWalletInfo(req.user);
+        break;
+      case "ETH":
+        walletInfo = await getEthereumWalletInfo(req.user);
         break;
     }
 

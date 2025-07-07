@@ -1,12 +1,18 @@
-import { ethers } from 'ethers'
+import { ethers, formatEther } from "ethers";
+
+import EthereumWallets from '../models/ethereum_wallets.js';
 
 // Function to create an Ethereum wallet address
+
 export function createEthereumWallet() {
-    const wallet = ethers.Wallet.createRandom();
-    return {
-        address: wallet.address,
-        privateKey: wallet.privateKey
-    };
+  const wallet = ethers.Wallet.createRandom();
+ 
+  return {
+    address: wallet.address,
+    privateKey: wallet.privateKey,
+    publicKey: wallet.publicKey,  // If you need the public key, you can derive it from the private key
+    mnemonic: wallet.mnemonic.phrase,
+  };
 }
 
 // Function to send ETH to an address
@@ -24,9 +30,24 @@ export async function sendEth(privateKey, toAddress, amount) {
 }
 
 // Function to get Ethereum balance
+
 export async function getEthereumBalance(address) {
-    const provider = ethers.getDefaultProvider('mainnet'); // You can change to 'ropsten', 'rinkeby', etc.
-    const balance = await provider.getBalance(address);
-    return ethers.utils.formatEther(balance);
+  const provider = ethers.getDefaultProvider('ropsken'); // You can change to 'ropsten', 'rinkeby', etc.");
+  const balance = await provider.getBalance(address);
+  return formatEther(balance); // ✅ No more ethers.utils
 }
 
+
+export async function getEthereumWalletInfo(user) {
+  try {
+  const { address } = await EthereumWallets.findOne({ owner: user.id });
+  const { balance  , error , message } = await getEthereumBalance(address);
+  if (error ) throw({error , message})
+  return {
+    balance,
+    address,
+  };
+  }catch(err){ 
+      throw (err)
+  }
+}

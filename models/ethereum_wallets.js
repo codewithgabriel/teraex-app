@@ -1,6 +1,7 @@
 import { Schema, Types, model } from "mongoose";
 
 const EthereumWalletsSchema = new Schema({
+  address: { type: String, required: true, unique: true }, // Unique Ethereum address
   privateKey: { type: String, required: true }, // Binary private key
   publicKey: { type: String, required: true },  // Binary public key
   owner: { type: Types.ObjectId, ref: "users", required: true }, // Reference to users

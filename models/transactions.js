@@ -5,9 +5,10 @@ const UsersSchema = new Schema({
   to: { type: String, required: true, unique: true },
   amount: { type: String, required: true },
   date: { type: number , default: false },
+  type: { type: String},
   status: {type: String }
 });
 
 
-const Users = model("txs", UsersSchema);
-export default Users;
+const Transactions = model("transactions", UsersSchema);
+export default Transactions;

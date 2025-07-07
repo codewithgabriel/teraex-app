@@ -1,15 +1,14 @@
-import { Schema, Types, model } from "mongoose";
 
-const TokenMetaDataScheme = new Schema({
+import { Schema, model , Types } from "mongoose";
+
+const UsersSchema = new Schema({
   label: { type: String, required: true, unique: true },
   symbol: { type: String, required: true, unique: true },
-  logo: { type: String, required: true },
-  isAvailable: { type: Boolean, default: false },
+  logo_url: { type: String, required: true },
+  isActive: {type: Boolean , default: false  },
   ratePerDollar: {type: Number, },
-  ratePerEuro: {type: Number},
-  tokenId: {type: Types.ObjectId} ,
 });
 
 
-const TokeMetadata = model("token_metadata", TokenMetaDataScheme);
-export default TokeMetadata;
+const TokensMeta = model("token_meta", UsersSchema);
+export default TokensMeta;
