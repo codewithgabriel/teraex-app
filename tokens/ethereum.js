@@ -45,6 +45,7 @@ export async function getEthereumWalletInfo(user) {
   try {
   const { address } = await EthereumWallets.findOne({ owner: user.id });
   const { balance  , error , message } = await getEthereumBalance(address);
+  console.log(balance , error , message)
   if (error ) throw({error , message})
   return {
     balance,
