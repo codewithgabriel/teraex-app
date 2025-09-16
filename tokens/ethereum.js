@@ -2,6 +2,9 @@ import { ethers, formatEther } from "ethers";
 
 import EthereumWallets from '../models/ethereum_wallets.js';
 
+const network = process.env.ETHEREUM_NETWORK || 'sepolia';
+const alchemyApiKey = process.env.ALCHEMY_API_KEY 
+
 // Function to create an Ethereum wallet address
 
 export function createEthereumWallet() {
@@ -17,7 +20,7 @@ export function createEthereumWallet() {
 
 // Function to send ETH to an address
 export async function sendEth(privateKey, toAddress, amount) {
-    const provider = ethers.getDefaultProvider('mainnet'); // You can change to 'ropsten', 'rinkeby', etc.
+    const provider = ethers.getDefaultProvider(network , alchemyApiKey); // You can change to 'ropsten', 'rinkeby', etc.
     const wallet = new ethers.Wallet(privateKey, provider);
 
     const tx = {
@@ -32,7 +35,7 @@ export async function sendEth(privateKey, toAddress, amount) {
 // Function to get Ethereum balance
 
 export async function getEthereumBalance(address) {
-  const provider = ethers.getDefaultProvider('mainnet', process.env.ALCHEMY_API_KEY); // You can change to 'ropsten', 'rinkeby', etc.");
+  const provider = ethers.getDefaultProvider( network , alchemyApiKey); // You can change to 'ropsten', 'rinkeby', etc.");
   const balance = await provider.getBalance(address);
   return formatEther(balance); // ✅ No more ethers.utils
 }
