@@ -35,10 +35,19 @@ export async function sendEth(privateKey, toAddress, amount) {
 // Function to get Ethereum balance
 
 export async function getEthereumBalance(address) {
-  const provider = ethers.getDefaultProvider( network , alchemyApiKey); // You can change to 'ropsten', 'rinkeby', etc.");
-  const balance = await provider.getBalance(address);
-  return formatEther(balance); // ✅ No more ethers.utils
+  try {
+    const provider = ethers.getDefaultProvider(network, alchemyApiKey);
+    const balance = await provider.getBalance(address);
+    return { balance: formatEther(balance) };
+  } catch (err) {
+    return {
+      balance: null,
+      error: true,
+      message: err.message,
+    };
+  }
 }
+
 
 
 export async function getEthereumWalletInfo(user) {
