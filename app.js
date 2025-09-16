@@ -20,7 +20,7 @@ const __dirname = dirname(__filename);
 // starting express server
 var app = express();
 
-const port  = 3009 || process.env.PORT
+const port  = process.env.PORT  || 3009
 app.listen( port , (err)=> { 
   if (err) console.log(err) ;
   console.log(`server running on port ${port}`)
