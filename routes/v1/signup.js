@@ -72,6 +72,7 @@ const signupRouter = router.use("/", async function (req, res, next) {
 
   } catch (err) {
     // rollball all transactions if an error occurs
+    console.error("Error creating user account:", err);
     await session.abortTransaction();
     session.endSession();
 
