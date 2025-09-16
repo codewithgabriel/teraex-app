@@ -15,8 +15,6 @@ const __dirname = dirname(__filename);
 
 
 
-
-
 // starting express server
 var app = express();
 
