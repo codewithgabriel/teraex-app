@@ -32,7 +32,7 @@ export async function sendEth(privateKey, toAddress, amount) {
 // Function to get Ethereum balance
 
 export async function getEthereumBalance(address) {
-  const provider = ethers.getDefaultProvider('ropsken'); // You can change to 'ropsten', 'rinkeby', etc.");
+  const provider = ethers.getDefaultProvider('mainnet'); // You can change to 'ropsten', 'rinkeby', etc.");
   const balance = await provider.getBalance(address);
   return formatEther(balance); // ✅ No more ethers.utils
 }
