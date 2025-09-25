@@ -42,7 +42,7 @@ router.post("/", async function (req, res, next) {
     res.send({ error: false, payload: tx, message: TX_SEND_SUCCESS });
   } catch (error) {
     res.send({ error: true, status: error.status });
-    // console.log(error);
+    console.log(error);
   }
 });
 
