@@ -6,7 +6,7 @@
     "train_split": 0.8,
     
     "window_size": 50,
-    "initial_balance": 200.0,
+    "initial_balance": 0.0,
     
     "commission_pct": 0.001,
     "commission_fixed": 0.0,
