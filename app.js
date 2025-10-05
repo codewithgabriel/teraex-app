@@ -51,7 +51,9 @@ main().catch(err => console.log(err));
 
 async function main() {
   try {
-    await connect(process.env.MONGODB_URL);
+    let _url =  (process.env.ENV == "DEV") ? process.env.MONGODB_URL_DEV : process.env.MONGODB_URL_PROD
+    console.log("Connecting to database...")
+    await connect(_url);
     console.log('Database Connected')
   }catch(err) { 
     console.error(err)

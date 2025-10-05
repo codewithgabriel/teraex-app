@@ -1,7 +1,7 @@
 import { configDotenv } from "dotenv";
 configDotenv();
 import pkg from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 const { sign } = pkg;
 
 let { APP_SECRET_KEY, BTC_RATE, BTC_UNIT, MAX_TIMEOUT } = process.env;
