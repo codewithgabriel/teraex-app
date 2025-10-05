@@ -47,6 +47,8 @@ def run_backtest(model, test_df, env):
         action, _ = model.predict(obs, deterministic=True)
         obs, reward, done, info = env.step(action)
         
+        print(info)
+        
         # Store current net worth
         net_worths.append(info[0]['net_worth'])
         

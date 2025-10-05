@@ -1,7 +1,7 @@
 {
     "asset_symbol": "AAPL",
     "csv_path": "dataset/aapl.csv",
-    "start_date": "2015-01-01",
+    "start_date": "2021-01-01",
     "end_date": "2023-01-01",
     "train_split": 0.8,
     
