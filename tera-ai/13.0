@@ -1,6 +1,0 @@
-Collecting websockets
-  Obtaining dependency information for websockets from https://files.pythonhosted.org/packages/7d/71/abf2ebc3bbfa40f391ce1428c7168fb20582d0ff57019b69ea20fa698043/websockets-15.0.1-cp312-cp312-win_amd64.whl.metadata
-  Using cached websockets-15.0.1-cp312-cp312-win_amd64.whl.metadata (7.0 kB)
-Using cached websockets-15.0.1-cp312-cp312-win_amd64.whl (176 kB)
-Installing collected packages: websockets
-Successfully installed websockets-15.0.1
