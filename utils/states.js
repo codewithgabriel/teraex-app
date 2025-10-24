@@ -1,4 +1,4 @@
-export const ENDPOINT = "/api/v1";
+export const ENDPOINT = ( import.meta.env.VITE_ENV == "DEV") ?  "/api/v1" : "/v1";
 
 // authentication states
 export const USER_ACCT_CREATE_ERR = "Error Creating User Account";
@@ -6,6 +6,8 @@ export const USER_ACCT_ALREADY_EXISTS = "User Account Already Exists";
 export const USER_ACCT_CREATE_SUCCESS = "User Account Created Successfully"
 export const USER_ACCT_AUTH_ERR = "User Authentication Error"
 export const USER_ACCT_AUTH_SUCCESS = "User Authentication Success"
+export const USER_ACCT_LOGOUT = "User Logout Sucessfully"
+export const USER_ACCT_LOGIN = "User Login Sucessfully"
 
 
 // transactions status 
@@ -51,11 +53,11 @@ export const WALLET_INFO_ERROR_UNKNOWN =  "Unknown Error Selecting Wallet"
 
 //http status 
 export const ACCEPT = "accept"
-export const REJECT = "reject"
+export const REJECT = "Something is wrong (reject)"
 export const IDLE  = "idle"
 export const ERROR = 'error'
 export const SUCCESS = 'success'
-export const PENDING = 'pending'
+export const PENDING = 'We are working on it (pending)'
 
 
 //http response status code

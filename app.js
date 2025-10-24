@@ -59,7 +59,7 @@ app.use('/v1/getWalletInfo' , getWalletInfoRouter)
 import teraRoutes from './routes/v1/tera_agent.js'
 app.get('/v1/tera/config' , teraRoutes.getConfigRoute)
 app.post('/v1/tera/config' , teraRoutes.setConfigRoute)
-app.post('/v1/tera/load/model' , teraRoutes.loadModelRoute)
+app.post('/v1/tera/model/load' , teraRoutes.loadModelRoute)
 app.post('/v1/tera/backtest' , teraRoutes.runBacktestRoute)
 
 
