@@ -1,6 +1,5 @@
 // export const ENDPOINT = ( import.meta.env.VITE_ENV == "DEV") ?  "/api/v1" : "/v1";
 
-
 export const ENDPOINT = "/v1";
 
 // authentication states
