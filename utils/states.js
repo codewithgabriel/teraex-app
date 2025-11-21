@@ -11,7 +11,6 @@ export const USER_ACCT_AUTH_SUCCESS = "User Authentication Success"
 export const USER_ACCT_LOGOUT = "User Logout Sucessfully"
 export const USER_ACCT_LOGIN = "User Login Sucessfully"
 
-
 // transactions status 
 export const TX_PROCESSING  = "Transaction Processing";
 export const TX_RECEIVED = "Transaction Received"
